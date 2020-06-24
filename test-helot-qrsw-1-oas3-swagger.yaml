@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  version: "1-oas3"
+  title: ''
+  description: ''
+  
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        what:
+          type: integer
+          example: 1
+        descr:
+          type: string
+          example: Planet GT-805A(v3) AA40255101478(000)
+        in_store:
+          type: boolean
+        where:
+          type: string
+          example: '18'
+
+paths:
+  '/api/item/{item_id}/':
+    get:
+      description: Displays details of an item
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          description: Number of item to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK message
+          content:
+            'appliaction/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+    post:
+      description: Updates an item
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          description: Number of item to update
+          schema:
+            type: string
+      requestBody:
+        description: TODO
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: OK message
+          content:
+            'appliaction/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found.
+                
+  '/api/item/{item_id}/{mode}/':
+    post:
+      description: Displays details of an item
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          description: Number of item to get
+          schema:
+            type: string
+        - name: mode
+          in: path
+          required: true
+          description: 'Mode of operation, neutral mode is should be performed as GET without mode.'
+          schema:
+            type: string
+            enum:
+              - add
+              - take
+              - oper
+      responses:
+        '200':
+          description: OK message
+          content:
+            'appliaction/json':
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+
+
+servers:
+  - url: 'https://virtserver.swaggerhub.com/test-helot/qrsw/1'
