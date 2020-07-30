@@ -21,7 +21,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
-//i tyle
+
 public class MainActivity extends AppCompatActivity {
 
     private SurfaceView svBarcode;
